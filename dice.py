@@ -67,4 +67,3 @@ def run_program():
     num_of_dice = int(input("How many dice do you want to roll?: "))
     roll_dice(num_of_dice)
 
-run_program()
