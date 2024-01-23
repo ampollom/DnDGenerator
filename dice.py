@@ -4,7 +4,7 @@ import pandas as pd
 import pyarrow
 
 arr = []
-name_num = 1006
+name_num = 1007
 item_num = 21
 
 #checks if input is an integer
@@ -21,28 +21,32 @@ def roll_dice(input_string):
     else:
         pickasheet = input("What are you rolling for? Names or Items?: ").lower()
         if (pickasheet == 'names'):
+            filename = "names.xlsx"
+            print("You can choose from the following options: girl_names or boy_names")
             while input_string != 0:
                 dice_value = random.randrange(1, name_num)
                 arr.append(dice_value)
                 input_string = input_string - 1
-                filename = "names.xlsx"
+
         else:
+            filename = "gold.xlsx"
+            print("You can choose from the following options: gold, spell_scrolls, weapons_shitty"
+                  ", random_shitty_items, random_nice_items")
             while input_string != 0:
                 dice_value = random.randrange(1, item_num)
                 arr.append(dice_value)
                 input_string = input_string - 1
-                filename = "gold.xlsx"
+
     #print(arr)
     read_spreadsheet(arr, filename)
+
+
 
 #reads and pulls items from spreadsheet
 def read_spreadsheet(arr, filename):
 
     df = pd.read_excel(filename)
     items = []
-
-    print("You can choose from the following options: girl_names, boy_names, spell_scrolls, gold"
-          "random_items, weapons, or food.")
 
     while len(arr) != 0:
         num = arr[0]
@@ -72,6 +76,7 @@ def reroll_dice():
         run_program()
     elif s == 'n':
         print("Thanks for rolling!")
+        exit(0)
     else:
         print("Not a valid option")
         reroll_dice()
