@@ -1,6 +1,7 @@
 import random
 import pandas as pd
 import pyarrow
+from functools import lru_cache
 
 arr = []
 name_num = 1007
@@ -26,7 +27,7 @@ def roll_dice(input_string, filename, dict):
                 arr.append(dice_value)
                 input_string = input_string - 1
 
-        elif (filename == "gold.xlsx"):
+        elif (filename == "gold.xlsx" or filename == "randomencounters.xlsx"):
             while input_string != 0:
                 dice_value = random.randrange(1, item_num)
                 arr.append(dice_value)
@@ -37,7 +38,7 @@ def roll_dice(input_string, filename, dict):
     #return arr
 
 
-
+#@lru_cache(maxsize=100)
 #reads and pulls items from spreadsheet
 def read_spreadsheet(arr, filename, dict):
 
@@ -67,11 +68,10 @@ def read_spreadsheet(arr, filename, dict):
 
 #prints items
 def print_items(items):
-    #print("***********************************\n"+
-         # "Found following items:\n")
+    print("********************")
     for item in items:
         print(item)
-    #print("***********************************\n")
+    print("********************\n")
     #reroll_dice()
 
 def reroll_dice():
